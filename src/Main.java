@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        // Тестирование класса Product
+        // Тестирование класса Product /
         System.out.println("=== Тестирование класса Product ===");
         Product p1 = new Product(101, "Смартфон", 50000, "Электроника");
         Product p2 = new Product(101, "Смартфон Pro", 60000, "Электроника");

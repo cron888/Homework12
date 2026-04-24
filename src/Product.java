@@ -13,7 +13,7 @@ public class Product {
         this.category = category;
     }
 
-    // Геттеры
+    // Геттеры /
     public int getId() { return id; }
     public String getName() { return name; }
     public int getPrice() { return price; }

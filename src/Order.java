@@ -10,7 +10,7 @@ public class Order {
         this.basket = basket != null ? basket.clone() : null;
     }
 
-    // Геттеры
+    // Геттеры /
     public String getCustomer() { return customer; }
     public Product[] getBasket() { return basket != null ? basket.clone() : null; }
 
