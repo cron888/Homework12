@@ -1,110 +1,3 @@
-import java.util.Arrays;
-import java.util.Objects;
-
-// Класс товара
-class Product {
-    private int id;
-    private String name;
-    private int price;
-    private String category;
-
-    public Product(int id, String name, int price, String category) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.category = category;
-    }
-
-    // Геттеры
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public int getPrice() { return price; }
-    public String getCategory() { return category; }
-
-    @Override
-    public String toString() {
-        return "Товар[артикул=" + id +
-                ", название=" + name +
-                ", цена=" + price +
-                ", категория=" + category + "]";
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Product product = (Product) obj;
-        return id == product.id &&
-               Objects.equals(category, product.category);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, category);
-    }
-}
-
-// Класс заказа
-class Order {
-    private String customer;
-    private Product[] basket;
-
-    public Order(String customer, Product[] basket) {
-        this.customer = customer;
-        this.basket = basket != null ? basket.clone() : null;
-    }
-
-    // Геттеры
-    public String getCustomer() { return customer; }
-    public Product[] getBasket() { return basket != null ? basket.clone() : null; }
-
-    @Override
-    public String toString() {
-        return "Заказ{клиент='" + customer + '\'' +
-                ", корзина=" + Arrays.toString(basket) + '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Order order = (Order) obj;
-
-        // Сравниваем клиента
-        if (!Objects.equals(customer, order.customer)) return false;
-
-        // Сравниваем массив товаров
-        Product[] thisBasket = this.basket;
-        Product[] otherBasket = order.basket;
-
-        if (thisBasket == null && otherBasket == null) return true;
-        if (thisBasket == null || otherBasket == null) return false;
-        if (thisBasket.length != otherBasket.length) return false;
-
-        for (int i = 0; i < thisBasket.length; i++) {
-            Product p1 = thisBasket[i];
-            Product p2 = otherBasket[i];
-
-            if (p1 == null && p2 == null) continue;
-            if (p1 == null || p2 == null) return false;
-            if (!p1.equals(p2)) return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = Objects.hash(customer);
-        if (basket != null) {
-            for (Product p : basket) {
-                result = 31 * result + (p != null ? p.hashCode() : 0);
-            }
-        }
-        return result;
-    }
-}
-
 public class Main {
     public static void main(String[] args) {
         // Тестирование класса Product
@@ -122,9 +15,9 @@ public class Main {
         System.out.println(p5);
 
         System.out.println("\nСравнение товаров:");
-        System.out.println("p1.equals(p2): " + p1.equals(p2)); // true (id и категория совпадают)
-        System.out.println("p1.equals(p3): " + p1.equals(p3)); // false (разные id)
-        System.out.println("p1.equals(p4): " + p1.equals(p4)); // false (разные категории)
+        System.out.println("p1.equals(p2): " + p1.equals(p2)); // true
+        System.out.println("p1.equals(p3): " + p1.equals(p3)); // false
+        System.out.println("p1.equals(p4): " + p1.equals(p4)); // false
         System.out.println("p1.equals(p5): " + p1.equals(p5)); // true
 
         // Тестирование класса Order
@@ -148,8 +41,8 @@ public class Main {
 
         System.out.println("\nСравнение заказов:");
         System.out.println("o1.equals(o2): " + o1.equals(o2)); // true
-        System.out.println("o1.equals(o3): " + o1.equals(o3)); // false (порядок разный)
-        System.out.println("o1.equals(o4): " + o1.equals(o4)); // false (состав разный)
-        System.out.println("o1.equals(o5): " + o1.equals(o5)); // false (клиент разный)
+        System.out.println("o1.equals(o3): " + o1.equals(o3)); // false
+        System.out.println("o1.equals(o4): " + o1.equals(o4)); // false
+        System.out.println("o1.equals(o5): " + o1.equals(o5)); // false
     }
 }
